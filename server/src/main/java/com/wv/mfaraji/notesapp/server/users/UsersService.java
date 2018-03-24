@@ -13,10 +13,8 @@ public class UsersService {
 	@Autowired
 	private UserRepositoty userRepositoty;
 	
-	public List<User> getAllTopics() {
-		List<User> users = new ArrayList<User>();
-		this.userRepositoty.findAll().forEach(users::add);		
-		return users;		
+	public List<User> getAllUsers() {
+		return this.userRepositoty.findAll();				
 	}
 	
 	public Optional<User> getUser(long id) {
