@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -10,12 +11,14 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
+import { TokenInterceptor } from './token.interceptor';
+
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { SiteLayoutComponent } from './site-layout/site-layout.component';
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
 import { LandingComponent } from './landing/landing.component';
-import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -23,8 +26,7 @@ import { LoginComponent } from './login/login.component';
     AppLayoutComponent,
     SiteLayoutComponent,
     AdminLayoutComponent,
-    LandingComponent,
-    LoginComponent
+    LandingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,14 @@ import { LoginComponent } from './login/login.component';
     NgbModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

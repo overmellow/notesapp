@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  template: `<router-outlet></router-outlet>`
 })
 export class AppComponent {
   title = 'Notes App';

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://192.168.31.129:4200")
 @RestController
-@RequestMapping("users")
+@RequestMapping("api/users")
 public class UsersController {
 	
 	@Autowired
@@ -28,7 +28,7 @@ public class UsersController {
 		return this.usersService.getUser(id).orElseThrow(() -> new UserNotFoundException(id));
 	}
 	
-	@RequestMapping(method=RequestMethod.POST, value="/")
+	@RequestMapping(method=RequestMethod.POST)
 	public void addUser(@RequestBody User user) {
 		this.usersService.addUser(user);		
 	}
