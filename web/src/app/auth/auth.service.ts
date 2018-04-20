@@ -11,7 +11,6 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
 
-  currentUser: User;
   redirectUrl: String;
 
   constructor(
@@ -27,11 +26,11 @@ export class AuthService {
   }
 
   setAuthToken(token) {
-    localStorage.setItem('token', token);
+    localStorage.setItem('jwtToken', token);
   }
 
   getAuthToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('jwtToken');
   }
 
   getAuthorizationToken() {
@@ -39,15 +38,18 @@ export class AuthService {
   }
 
   signup(signupUser) {
-    return this.httpClient.post('http://192.168.31.129:8080/auth/signup', signupUser, httpOptions);
+    return this.httpClient.post('auth/signup', signupUser, httpOptions);
   }
 
   login(loginUser) {
-    return this.httpClient.post('http://192.168.31.129:8080/auth/login', loginUser, httpOptions);
+    return this.httpClient.post('auth/login', loginUser, httpOptions);
+  }
+
+  logoute(logoutUser) {
+    return this.httpClient.post('logout', logoutUser, httpOptions);
   }
 
   logout(): void {
-    delete this.currentUser;
     localStorage.removeItem('currentUser');
     localStorage.removeItem('jwtToken');
   }

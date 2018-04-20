@@ -17,8 +17,8 @@ public class UsersService {
 		return this.userRepositoty.findAll();				
 	}
 	
-	public Optional<User> getUser(long id) {
-		return this.userRepositoty.findById(id);
+	public User getUser(Long id) {
+		return this.userRepositoty.findById(id).orElse(new User());
 	}
 	
 	public User addUser(User user) {

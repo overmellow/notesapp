@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class NotesService {
@@ -16,8 +15,8 @@ public class NotesService {
 		return this.noteRepositoty.findByUserId(id);				
 	}
 	
-	public Optional<Note> getNote(long id) {
-		return this.noteRepositoty.findById(id);
+	public Note getNote(Long id) {
+		return this.noteRepositoty.findById(id).get();
 	}
 	
 	public Note addNote(Note note) {

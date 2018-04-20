@@ -1,0 +1,32 @@
+<button (click)="goBack()" class="btn btn-outline-primary float-right">Go Back</button>
+<h3>Note Detail</h3>
+<hr>
+<div class="row">
+  <div class="col-sm-8">
+
+    <div class="form-group">
+      <label>Id</label>
+      <input type="text" class="form-control" placeholder="Id" [disabled]="true" [(ngModel)]="note.id">
+    </div>
+    <div class="form-group">
+      <label>Note</label>
+      <input type="text" class="form-control" placeholder="Note" [(ngModel)]="note.content">
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Image</label>
+      <input #fileInput (change)="fileUpload($event)" type="file" class="form-control-file" id="file">
+    </div>
+
+    <button (click)="updateNote(note)" class="btn btn-outline-success">Update Note</button>
+    <button (click)="deleteNote(note)" class="btn btn-outline-danger float-right">Delete Note</button>
+
+  </div>
+  <div class="col-sm-4">
+
+    <img #noteImage class="img-thumbnail float-right">
+
+  </div>
+</div>
+
+

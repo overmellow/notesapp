@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NotesComponent } from './notes.component';
 import { ListNotesComponent } from './list-notes/list-notes.component';
+import { AddNoteComponent } from './add-note/add-note.component';
+import { DetailNoteComponent } from './detail-note/detail-note.component';
+
+import { UsersComponent } from '../users/users.component';
 
 const notesRoutes: Routes = [
   {
@@ -10,8 +14,8 @@ const notesRoutes: Routes = [
     component: NotesComponent,
     children: [
       { path: '',  component: ListNotesComponent },
-      // { path: 'add', component: AddUserComponent },
-      // { path: 'detail/:id', component: DetailUserComponent }
+      { path: 'add', component: AddNoteComponent },
+      { path: 'detail/:id', component: DetailNoteComponent }
     ]
   }
 ];

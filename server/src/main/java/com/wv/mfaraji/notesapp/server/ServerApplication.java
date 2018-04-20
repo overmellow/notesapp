@@ -5,18 +5,21 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import com.wv.mfaraji.notesapp.server.notes.Note;
-import com.wv.mfaraji.notesapp.server.notes.NoteRepositoty;
 import com.wv.mfaraji.notesapp.server.notes.NotesService;
 import com.wv.mfaraji.notesapp.server.users.User;
 import com.wv.mfaraji.notesapp.server.users.UsersService;
 
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.wv.mfaraji.notesapp.server.auth.JwtFilter;
+import com.wv.mfaraji.notesapp.server.files.StorageService;
 
 @SpringBootApplication
 public class ServerApplication {
@@ -26,7 +29,7 @@ public class ServerApplication {
 	}
 	
 	@Bean
-	CommandLineRunner init(UsersService usersService, NotesService notesService) throws Exception{
+	CommandLineRunner init(UsersService usersService, NotesService notesService, StorageService storageService) throws Exception{
 		return (args) -> {
 			User mori = new User("mori", "2000");
 			User john = new User("john", "2000");
@@ -34,12 +37,15 @@ public class ServerApplication {
 			usersService.addUser(mori);
 			usersService.addUser(john);
 			
-			notesService.addNote(new Note("help", mori));
-			notesService.addNote(new Note("shopping", mori));
-			notesService.addNote(new Note("walk", mori));
+			notesService.addNote(new Note("help", "test.jpeg", mori));
+			notesService.addNote(new Note("shopping", "test.jpeg", mori));
+			notesService.addNote(new Note("walk", "test.jpeg", mori));
+			notesService.addNote(new Note("iay", "test.jpeg", mori));
 			
-			notesService.addNote(new Note("buy home", john));
-			notesService.addNote(new Note("polish", john));
+			notesService.addNote(new Note("buy home", "test.jpeg", john));
+			notesService.addNote(new Note("polish", "test.jpeg", john));
+			
+			storageService.init();
 		};
 	}
 	
@@ -60,5 +66,16 @@ public class ServerApplication {
 //	            registry.addMapping("/*").allowedOrigins("http://192.168.31.129:4200");
 //	        }
 //	    };
+//	}
+	
+//	@Configuration
+//	@EnableWebMvc
+//	public class MvcConfig implements WebMvcConfigurer {
+//	    @Override
+//	    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//	        registry
+//	          .addResourceHandler("/upload/**")
+//	          .addResourceLocations("/resources/"); 
+//	    }
 //	}
 }

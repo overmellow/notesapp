@@ -1,0 +1,25 @@
+<button (click)="goBack()" class="btn btn-outline-primary float-right">Go Back</button>
+<h3>Note Detail</h3>
+<hr>
+<form (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group">
+        <label>Note</label>
+        <input type="text" class="form-control" id="content" [(ngModel)]="model.content" name="content">
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlFile1">Image</label>
+        <input #fileInput (change)="fileUpload($event)" type="file" class="form-control-file" id="file">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit</button>
+    </div>
+    <div class="col-sm-4">
+
+      <img #noteImage class="img-thumbnail float-right">
+
+    </div>
+  </div>
+</form>

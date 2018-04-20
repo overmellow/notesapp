@@ -10,7 +10,6 @@ import { User } from '../user';
   templateUrl: './list-users.component.html'
 })
 export class ListUsersComponent implements OnInit {
-
   users: User[];
 
   constructor(
@@ -27,9 +26,4 @@ export class ListUsersComponent implements OnInit {
     this.usersService.getUsers()
       .subscribe(users => this.users = users);
   }
-
-  gotoDetail(id: number): void {
-    this.router.navigate(['/users/detail/', id]);
-  }
-
 }

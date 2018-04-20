@@ -1,7 +1,6 @@
 package com.wv.mfaraji.notesapp.server.notes;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -9,7 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RestController;
+
+import com.wv.mfaraji.notesapp.server.users.User;
 
 @CrossOrigin(origins = "http://192.168.31.129:4200")
 @RestController
@@ -25,17 +27,19 @@ public class NotesController {
 	}
 
 	@RequestMapping("/notes/{id}")
-	public Optional<Note> getNote(@PathVariable Long id) {
+	public Note getNote(@PathVariable Long id) {
 		return this.notesService.getNote(id);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST, value="/notes")
-	public void addNote(@RequestBody Note note) {
+	public void addNote(@PathVariable Long userId, @RequestBody Note note ) {
+		note.setUser(new User(userId));
 		this.notesService.addNote(note);		
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/notes/{id}")
-	public void updateNote(@RequestBody Note note, @PathVariable Long id) {
+	public void updateNote(@PathVariable Long userId, @RequestBody Note note, @PathVariable Long id) {
+		note.setUser(new User(userId));
 		this.notesService.updateNote(note);		
 	}
 

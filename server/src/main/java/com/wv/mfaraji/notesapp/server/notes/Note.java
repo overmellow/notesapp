@@ -15,6 +15,7 @@ public class Note {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String content;
+	private String image;
 	
 	@JsonIgnore
     @ManyToOne
@@ -35,6 +36,14 @@ public class Note {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 	public User getUser() {
 		return user;
@@ -48,6 +57,12 @@ public class Note {
 	
 	public Note(String content, User user) {
 		this.content = content;
+		this.user = user;
+	}
+	
+	public Note(String content, String image, User user) {
+		this.content = content;
+		this.image = image;
 		this.user = user;
 	}
 }

@@ -25,7 +25,7 @@ public class UsersController {
 	
 	@RequestMapping("/{id}")
 	public User getUser(@PathVariable Long id) {
-		return this.usersService.getUser(id).orElseThrow(() -> new UserNotFoundException(id));
+		return this.usersService.getUser(id);//.orElseThrow(() -> new UserNotFoundException(id));
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)

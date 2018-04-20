@@ -19,6 +19,9 @@ import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
 import { LandingComponent } from './landing/landing.component';
 import { AuthService } from './auth/auth.service';
+import { ServerService } from './server.service';
+import { FilesService } from './files.service';
+import { WindowRefService } from './window-ref.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,9 @@ import { AuthService } from './auth/auth.service';
   ],
   providers: [
     AuthService,
+    ServerService,
+    FilesService,
+    WindowRefService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

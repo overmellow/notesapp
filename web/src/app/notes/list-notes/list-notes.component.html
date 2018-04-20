@@ -1,3 +1,19 @@
-<p>
-  list-notes works!
-</p>
+<a routerLink="add" class="btn btn-outline-success float-right">Add Note</a>
+<h3>Notes</h3>
+<hr>
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let note of notes">
+
+      <div class="card m-3" >
+        <div class="card-body">
+          <h5 class="card-title">{{note.id}}</h5>
+          <p class="card-text">{{note.content}}</p>
+          <a routerLink="detail/{{note.id}}" class="btn btn-primary">Go to detail</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

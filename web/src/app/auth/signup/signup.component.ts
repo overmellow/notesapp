@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 
@@ -7,15 +7,12 @@ import { Router } from '@angular/router';
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
-export class SignupComponent implements OnInit {
+export class SignupComponent {
 
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
-
-  ngOnInit() {
-  }
 
   signup(username: String, password: String) {
     if (!username && !password) { return; }

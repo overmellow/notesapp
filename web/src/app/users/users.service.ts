@@ -16,24 +16,24 @@ export class UsersService {
   ) { }
 
   getUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://192.168.31.129:8080/api/users');
+    return this.httpClient.get<User[]>('api/users');
   }
 
   getUser(id: number): Observable<User> {
-    return this.httpClient.get<User>('http://192.168.31.129:8080/api/users/' + id);
+    return this.httpClient.get<User>('api/users/' + id);
   }
 
   addUser(user: User): Observable<User> {
-    return this.httpClient.post<User>('http://192.168.31.129:8080/api/users', user, httpOptions);
+    return this.httpClient.post<User>('api/users', user, httpOptions);
   }
 
   updateUser(user: User): Observable<User> {
     const id = typeof user === 'number' ? user : user.id;
-    return this.httpClient.put<User>('http://192.168.31.129:8080/api/users/' + id, user, httpOptions);
+    return this.httpClient.put<User>('api/users/' + id, user, httpOptions);
   }
 
   deleteUser(user: User | number) {
     const id = typeof user === 'number' ? user : user.id;
-    return this.httpClient.delete<User>('http://192.168.31.129:8080/api/users/' + id,  httpOptions);
+    return this.httpClient.delete<User>('api/users/' + id,  httpOptions);
   }
 }
