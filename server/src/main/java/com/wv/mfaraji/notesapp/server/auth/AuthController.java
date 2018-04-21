@@ -20,10 +20,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import com.wv.mfaraji.notesapp.server.users.User;
 import com.wv.mfaraji.notesapp.server.users.UsersService;
 
-@CrossOrigin(origins = "http://192.168.31.129:4200")
+@CrossOrigin
+//@CrossOrigin(origins = "http://192.168.31.129:4200")
 @RestController
 @RequestMapping("/auth")
-public class Auth {
+public class AuthController {
 	
 	@Autowired
 	private UsersService userService;

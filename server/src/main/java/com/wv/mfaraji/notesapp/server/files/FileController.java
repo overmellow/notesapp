@@ -26,7 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import org.springframework.util.StreamUtils;
 
-@CrossOrigin(origins = "http://192.168.31.129:4200")
+@CrossOrigin
+//@CrossOrigin(origins = "http://192.168.31.129:4200")
 @RestController
 @RequestMapping(value ="api/files")
 public class FileController {
@@ -45,7 +46,7 @@ public class FileController {
 	
 	@GetMapping(value = "/image", produces = MediaType.IMAGE_JPEG_VALUE)
 	public @ResponseBody ResponseEntity<byte[]> getText(@RequestParam String filename, HttpServletResponse response) throws IOException {
-		Resource imgFile = this.resourceLoader.getResource("file:uploads/" + filename);
+		Resource imgFile = this.resourceLoader.getResource("file:../uploads/" + filename);
 		//Resource imgFile = new ClassPathResource("uploads/" + filename);
         byte[] bytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
         return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(bytes);        

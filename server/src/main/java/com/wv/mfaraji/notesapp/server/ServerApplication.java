@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 
 import com.wv.mfaraji.notesapp.server.notes.Note;
 import com.wv.mfaraji.notesapp.server.notes.NotesService;
@@ -60,10 +61,14 @@ public class ServerApplication {
 	
 //	@Bean
 //	public WebMvcConfigurer corsConfigurer() {
-//	    return new WebMvcConfigurerAdapter() {
+//	    return new WebMvcConfigurer() {
 //	        @Override
 //	        public void addCorsMappings(CorsRegistry registry) {
-//	            registry.addMapping("/*").allowedOrigins("http://192.168.31.129:4200");
+//	        	System.out.println("hello");
+//	            registry.addMapping("/**").allowedOrigins("http://127.0.0.1:4200/")
+//	            	.allowedMethods("*")
+//	            	.allowedHeaders("*")
+//	            	.allowCredentials(true);	         
 //	        }
 //	    };
 //	}
