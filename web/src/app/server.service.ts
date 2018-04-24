@@ -5,13 +5,13 @@ import { environment } from '../environments/environment.prod';
 
 @Injectable()
 export class ServerService {
-  private serverUrl = 'http://172.17.0.1';
-  private serverPort = '4300';
+  private serverUrl = 'http://localhost';
+  private serverPort = '8080';
 
   constructor() {
     if (environment.production) {
-      this.serverUrl = environment.serverUrl;
-      this.serverPort = environment.serverPort;
+      //this.serverUrl = environment.serverUrl;
+      //this.serverPort = environment.serverPort;
     }
 
     // if (ServerServiceConfig) {
