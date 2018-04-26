@@ -13,7 +13,8 @@ import { AuthService } from './auth/auth.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/users', pathMatch: 'full' },
-  { path: '', component: LandingComponent },
+  // { path: '', component: LandingComponent },
+  { path: 'landing', component: LandingComponent},
   { path: 'users', component: AdminLayoutComponent, loadChildren: './users/users.module#UsersModule', canActivate: [AuthGuardService]},
   { path: 'notes', component: AppLayoutComponent, loadChildren: './notes/notes.module#NotesModule', canActivate: [AuthGuardService]},
   { path: 'auth', component: SiteLayoutComponent, loadChildren: './auth/auth.module#AuthModule'},

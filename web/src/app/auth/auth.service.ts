@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/finally';
 
 import { User } from '../users/user';
 
@@ -42,16 +44,17 @@ export class AuthService {
   }
 
   login(loginUser) {
-    return this.httpClient.post('auth/login', loginUser, httpOptions);
+    // tslint:disable-next-line:max-line-length
+    return this.httpClient.post('login', loginUser, { observe: 'response', headers: new HttpHeaders().set('Content-Type', 'application/json') });
   }
 
-  logoute(logoutUser) {
-    return this.httpClient.post('logout', logoutUser, httpOptions);
-  }
-
-  logout(): void {
+  logout() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('jwtToken');
+  }
+
+  getAuthenticatedUser() {
+    return this.httpClient.get('auth/authenticated');
   }
 
 }

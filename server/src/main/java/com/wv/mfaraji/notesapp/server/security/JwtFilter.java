@@ -1,4 +1,4 @@
-package com.wv.mfaraji.notesapp.server.auth;
+package com.wv.mfaraji.notesapp.server.security;
 
 import java.io.IOException;
 

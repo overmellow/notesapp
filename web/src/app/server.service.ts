@@ -10,8 +10,8 @@ export class ServerService {
 
   constructor() {
     if (environment.production) {
-      //this.serverUrl = environment.serverUrl;
-      //this.serverPort = environment.serverPort;
+      // this.serverUrl = environment.serverUrl;
+      // this.serverPort = environment.serverPort;
     }
 
     // if (ServerServiceConfig) {

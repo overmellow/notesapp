@@ -3,6 +3,7 @@ package com.wv.mfaraji.notesapp.server.users;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,8 @@ public class UsersController {
 	
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@RequestMapping("")
 	public List<User> getUsers() {
@@ -31,6 +34,7 @@ public class UsersController {
 	
 	@RequestMapping(method=RequestMethod.POST)
 	public void addUser(@RequestBody User user) {
+		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		this.usersService.addUser(user);		
 	}
 	
