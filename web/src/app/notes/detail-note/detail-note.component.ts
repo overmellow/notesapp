@@ -16,7 +16,7 @@ import { FilesService } from '../../files.service';
 export class DetailNoteComponent implements OnInit {
 
   private _window: Window;
-  note: Note;
+  note: Note = {id: null, content: '', image: ''};
   noteId;
   @ViewChild('noteImage') image: ElementRef;
   @ViewChild('fileInput') el: ElementRef;

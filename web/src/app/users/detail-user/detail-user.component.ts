@@ -11,7 +11,7 @@ import { User } from '../user';
   templateUrl: './detail-user.component.html'
 })
 export class DetailUserComponent implements OnInit {
-  user: User;
+  user: User = {id: null, username: '', password: ''};
   id;
 
   constructor(

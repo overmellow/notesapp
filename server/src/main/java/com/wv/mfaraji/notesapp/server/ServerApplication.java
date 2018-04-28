@@ -1,5 +1,8 @@
 package com.wv.mfaraji.notesapp.server;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,11 +11,14 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.wv.mfaraji.notesapp.server.notes.Note;
 import com.wv.mfaraji.notesapp.server.notes.NotesService;
 import com.wv.mfaraji.notesapp.server.security.JwtFilter;
+import com.wv.mfaraji.notesapp.server.users.Role;
+import com.wv.mfaraji.notesapp.server.users.RoleRepository;
 import com.wv.mfaraji.notesapp.server.users.User;
 import com.wv.mfaraji.notesapp.server.users.UsersService;
 
@@ -25,6 +31,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import com.wv.mfaraji.notesapp.server.files.StorageService;
 
 @SpringBootApplication
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class ServerApplication {
 
 	@Autowired
@@ -40,10 +47,21 @@ public class ServerApplication {
     }
 	
 	@Bean
-	CommandLineRunner init(UsersService usersService, NotesService notesService, StorageService storageService) throws Exception{
+	CommandLineRunner init(UsersService usersService, RoleRepository roleRepository, NotesService notesService, StorageService storageService) throws Exception{
 		return (args) -> {
 			User mori = new User("mori", this.bCryptPasswordEncoder.encode("2000"));
 			User john = new User("john", this.bCryptPasswordEncoder.encode("1000"));
+			
+			Role user = new Role("USER");			
+			Role admin = new Role("ADMIN");
+			
+			
+			mori.setRoles(new HashSet<Role>(Arrays.asList(user, admin)));
+			john.setRoles(new HashSet<Role>(Arrays.asList(user)));
+//			john.addRole(admin);
+			
+			roleRepository.save(user);
+			roleRepository.save(admin);
 				
 			usersService.addUser(mori);
 			usersService.addUser(john);

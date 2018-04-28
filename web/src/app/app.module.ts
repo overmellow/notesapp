@@ -32,6 +32,7 @@ import { WindowRefService } from './window-ref.service';
     LandingComponent
   ],
   imports: [
+
     BrowserModule,
     HttpClientModule,
     FormsModule,

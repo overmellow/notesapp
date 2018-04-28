@@ -6,10 +6,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.wv.mfaraji.notesapp.server.users.Role;
 import com.wv.mfaraji.notesapp.server.users.User;
 import com.wv.mfaraji.notesapp.server.users.UserRepositoty;
 
 import static java.util.Collections.emptyList;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -23,7 +30,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (userRepository == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), emptyList());
+        
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        for (Role role : user.getRoles()){
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
+        
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        //return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), emptyList());
     }
 }
 

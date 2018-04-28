@@ -3,8 +3,11 @@ package com.wv.mfaraji.notesapp.server.security;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -16,7 +19,10 @@ import static com.wv.mfaraji.notesapp.server.security.SecurityConstants.SECRET;
 import static com.wv.mfaraji.notesapp.server.security.SecurityConstants.TOKEN_PREFIX;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
@@ -48,9 +54,24 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
+            
+            String scopesString = (String) Jwts.parser()
+                    .setSigningKey(SECRET.getBytes())
+                    .parseClaimsJws(token.replace(TOKEN_PREFIX, ""))
+                    .getBody()
+                    .get("scopes");
+            List<String> scopes = Arrays.asList(scopesString.split(","));
+       
 
             if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            	Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+            	scopes.forEach(s -> {
+            		grantedAuthorities.add(new SimpleGrantedAuthority(s));
+            	});
+            	//grantedAuthorities.add(new SimpleGrantedAuthority(scopes));
+//            	grantedAuthorities.add(new SimpleGrantedAuthority("USER"));
+            	return new UsernamePasswordAuthenticationToken(user, null, grantedAuthorities);
+//                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
             return null;
         }
