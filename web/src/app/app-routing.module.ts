@@ -10,12 +10,14 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 
 import { AuthGuardService } from './auth-guard.service';
 import { AuthService } from './auth/auth.service';
+import { AdminRoleGuardService } from './admin-role-guard.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/users', pathMatch: 'full' },
+  { path: '', redirectTo: '/notes', pathMatch: 'full' },
   // { path: '', component: LandingComponent },
   { path: 'landing', component: LandingComponent},
-  { path: 'users', component: AdminLayoutComponent, loadChildren: './users/users.module#UsersModule', canActivate: [AuthGuardService]},
+  // tslint:disable-next-line:max-line-length
+  { path: 'users', component: AdminLayoutComponent, loadChildren: './users/users.module#UsersModule', canActivate: [AuthGuardService, AdminRoleGuardService]},
   { path: 'notes', component: AppLayoutComponent, loadChildren: './notes/notes.module#NotesModule', canActivate: [AuthGuardService]},
   { path: 'auth', component: SiteLayoutComponent, loadChildren: './auth/auth.module#AuthModule'},
   // {
@@ -32,6 +34,7 @@ const routes: Routes = [
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ],
   providers: [
+    AdminRoleGuardService,
     AuthGuardService,
     AuthService
   ]

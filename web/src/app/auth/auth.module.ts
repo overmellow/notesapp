@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { RecoverComponent } from './recover/recover.component';
 import { AuthService } from './auth.service';
 import { LogoutComponent } from './logout/logout.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   imports: [
@@ -21,7 +22,8 @@ import { LogoutComponent } from './logout/logout.component';
     LoginComponent,
     SignupComponent,
     RecoverComponent,
-    LogoutComponent
+    LogoutComponent,
+    AdminComponent
   ],
   providers: [
     AuthService

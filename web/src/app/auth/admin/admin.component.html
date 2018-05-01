@@ -1,0 +1,17 @@
+<div class="container">
+
+  <div class="form-signin">
+    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Admin - Please Log In</h1>
+    <label for="inputEmail" class="sr-only">Username</label>
+    <input #username type="email" class="form-control" placeholder="Username" required="" autofocus="">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input #password type="password" class="form-control" placeholder="Password" required="">
+    <button (click)="login(username.value, password.value)" class="btn btn-lg btn-primary btn-block">Log In</button>
+    <br>
+    <a class="float-right" routerLink="/auth/login">User Login</a>
+
+    <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+  </div>
+
+</div>

@@ -47,7 +47,7 @@ import { WindowRefService } from './window-ref.service';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/finally';
 
 import { User } from '../users/user';
+import { Role } from './role';
+import { CurrentUser } from './currentUser';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -25,6 +27,20 @@ export class AuthService {
 
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  checkCurrentUserHasRole(role: string) {
+    const currentUser: CurrentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const roles: Role[] = currentUser['roles'];
+    let hasRole = false;
+
+    roles.forEach(r => {
+      if (r.role === role) {
+        hasRole = true;
+        return true;
+      }
+    });
+    return hasRole;
   }
 
   setAuthToken(token) {

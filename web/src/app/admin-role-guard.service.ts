@@ -3,7 +3,8 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthService } from './auth/auth.service';
 
 @Injectable()
-export class AuthGuardService implements CanActivate {
+export class AdminRoleGuardService implements CanActivate {
+
   constructor(
     private authService: AuthService,
     private router: Router
@@ -12,17 +13,12 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const url: string = state.url;
 
-    return this.checkLogin(url);
+    return this.checkRole(url);
   }
 
-  checkLogin(url: string): boolean {
-    if (this.authService.getCurrentUser()) { return true; }
+  checkRole(url: string): boolean {
+    if (this.authService.checkCurrentUserHasRole('ADMIN')) { return true; }
 
-    // Store the attempted URL for redirecting
-    this.authService.redirectUrl = url;
-
-    // Navigate to the login page with extras
-    this.router.navigate(['auth/login']);
     return false;
   }
 }

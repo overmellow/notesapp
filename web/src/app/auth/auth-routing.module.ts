@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RecoverComponent } from './recover/recover.component';
 import { LogoutComponent } from './logout/logout.component';
+import { AdminComponent } from './admin/admin.component';
 
 const authRoutes: Routes = [
   {
@@ -15,6 +16,7 @@ const authRoutes: Routes = [
       { path: 'login',  component: LoginComponent },
       { path: 'signup', component: SignupComponent },
       { path: 'recover', component: RecoverComponent },
+      { path: 'admin', component: AdminComponent },
       { path: 'logout', component: LogoutComponent}
     ]
   }
