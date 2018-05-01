@@ -1,22 +1,22 @@
 import { Injectable, Optional } from '@angular/core';
 
-import { environment } from '../environments/environment.prod';
+import { environment } from '../environments/environment';
 import { ServerServiceConfig } from './serverserviceconfig';
 
 @Injectable()
 export class ServerService {
-  private serverUrl = 'http://localhost';
-  private serverPort = '8080';
+  private serverUrl;
+  private serverPort;
 
   constructor() {
-    // if (environment.production) {
-    //   this.serverUrl = environment.serverUrl;
-    //   this.serverPort = environment.serverPort;
-    // }
-
-    if (ServerServiceConfig) {
-      this.serverUrl = ServerServiceConfig.serverUrl;
-      this.serverPort = ServerServiceConfig.serverPort;
+    if (environment.production) {
+      console.log('production');
+      this.serverUrl = ServerServiceConfig.production.serverUrl;
+      this.serverPort = ServerServiceConfig.production.serverPort;
+    } else {
+      console.log('development');
+      this.serverUrl = ServerServiceConfig.development.serverUrl;
+      this.serverPort = ServerServiceConfig.development.serverPort;
     }
   }
 
