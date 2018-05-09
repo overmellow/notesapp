@@ -10,11 +10,9 @@ export class ServerService {
 
   constructor() {
     if (environment.production) {
-      console.log('production');
       this.serverUrl = ServerServiceConfig.production.serverUrl;
       this.serverPort = ServerServiceConfig.production.serverPort;
     } else {
-      console.log('development');
       this.serverUrl = ServerServiceConfig.development.serverUrl;
       this.serverPort = ServerServiceConfig.development.serverPort;
     }

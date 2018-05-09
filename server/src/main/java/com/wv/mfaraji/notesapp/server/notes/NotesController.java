@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wv.mfaraji.notesapp.server.users.User;
 
 @CrossOrigin
-//@CrossOrigin(origins = "http://192.168.31.129:4200")
+//@CrossOrigin(origins = "http://192.168.31.129:8100")
 @RestController
 @RequestMapping("api/{userId}")
 public class NotesController {
